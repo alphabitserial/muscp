@@ -52,10 +52,10 @@ fn sanitize_path(p: &Path) -> PathBuf {
     let components: Vec<_> = p
         .components()
         .map(|c| {
-            if c.as_os_str().to_string_lossy() != "/" {
-                sanitize_with_options(c.as_os_str().to_string_lossy(), OPTIONS)
-            } else {
+            if c.as_os_str().to_string_lossy() == "/" {
                 "".to_string()
+            } else {
+                sanitize_with_options(c.as_os_str().to_string_lossy(), OPTIONS)
             }
         })
         .collect();
